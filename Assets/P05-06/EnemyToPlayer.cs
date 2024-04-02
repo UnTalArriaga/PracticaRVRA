@@ -24,12 +24,12 @@ public class EnemyToPlayer : MonoBehaviour
     void Update()
     {
         Proximity = Mathf.Sqrt(Mathf.Pow(Player.transform.position.x - transform.position.x, 2) + Mathf.Pow(Player.transform.position.y - transform.position.y, 2) + Mathf.Pow(Player.transform.position.z - transform.position.z, 2));
-        if (Proximity > 15 && Proximity<30 && Origen)//Deteccion del player
+        if (Proximity >80 && Proximity<120 && Origen)//Deteccion del player
         {
             Detect = true;
             animator.SetBool("Detect", Detect);
         }
-        if (Proximity<15 && !Seguimiento) //seguimiento del player
+        if (Proximity<80 && !Seguimiento) //seguimiento del player
         {
             Detect = false;
             Origen = false;
@@ -40,13 +40,13 @@ public class EnemyToPlayer : MonoBehaviour
             animator.SetFloat("Proximidad", Proximity);
             agent.destination = Player.transform.position;
         }
-        if (Proximity < 20 && Seguimiento)
+        if (Proximity < 80 && Seguimiento)
         {
             animator.SetFloat("Proximidad", Proximity); //si es menor a 2, realizara el ataque
             agent.destination = Player.transform.position;
         }
 
-        if (Proximity > 20 && Seguimiento) //regreso al origen (se perdio de alcance al pleyer)
+        if (Proximity > 80 && Seguimiento) //regreso al origen (se perdio de alcance al pleyer)
         {
             agent.destination = Position;
             Seguimiento = false;
